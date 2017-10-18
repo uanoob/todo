@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Import a pre-built */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+/* Import your custom input theme file so you can call the custom-input-theme function*/
+/*@import 'app/my-theme/my-theme.scss';*/
+
+/* Using the $theme variable from the pre-built theme you can call the theming function*/
+/*@include my-theme($theme);*/
+
+// some basic resets 
+
+body { 
+  padding: 0; 
+  margin: 0; 
+  font-family: Roboto, sans-serif; 
+  
+}
+
+
+

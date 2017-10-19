@@ -1,3 +1,21 @@
-<p>
-  home works!
-</p>
+
+
+      <mat-list>
+        <mat-list-item class="app-list" *ngFor="let task of tasks">
+        	<mat-checkbox [checked]="isChecked" mat-list-icon></mat-checkbox>
+          <h3 mat-line>{{task.title}}</h3>
+           <span class="fill-remaining-space"></span>
+           <span>{{task.time}}</span>
+          
+          <p mat-line>{{task.notes}}</p>
+        </mat-list-item>
+      </mat-list>
+    
+
+<span class="app-action">
+	<a routerLink="/taskdetail">
+		<button mat-fab><mat-icon>add circle outline</mat-icon></button>
+	</a>
+</span>
+
+ 

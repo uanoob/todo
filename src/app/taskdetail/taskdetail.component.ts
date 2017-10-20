@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskdetailComponent implements OnInit {
 
+  categores = [
+    'Red',
+    'Orange',
+    'Green',
+  ];
+
   constructor() { }
 
   ngOnInit() {

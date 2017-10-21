@@ -1,56 +1,38 @@
-<div class="form-container">
-  <mat-form-field>
-    <input matInput #title maxlength="50" placeholder="Tap a task">
-    <mat-hint align="start"><strong></strong> </mat-hint>
-    <mat-hint align="end">{{hour.value.length}} / 50</mat-hint>
+<div>
+  <form novalidate [formGroup]="taskForm" (ngSubmit)="onSubmit()" >
 
-  </mat-form-field>
+  	<mat-input-container class="full-width" 
+            dividerColor="{{(formErrors.title) ? 'warn' : 'primary'}}">
+              <input matInput formControlName="title" placeholder="Title" type="text" required>
+              <mat-hint>
+                <span [hidden]="!(formErrors.title)">
+                  {{formErrors.title}}</span>
+              </mat-hint>
+    </mat-input-container>
 
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-
-  <table class="full-width" cellspacing="0">
-  	<tr>
-    <td><mat-form-field class="full-width">
-      <input matInput #hour maxlength="2" placeholder="Tap a hours">
-      <mat-hint align="start"><strong></strong> </mat-hint>
-      <mat-hint align="end">{{hour.value.length}} / 2</mat-hint>
+    <mat-form-field class="full-width">
+      <input matInput formControlName="date" [matDatepicker]="picker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    </td>
 
-    <td><mat-form-field class="full-width">
-      <input matInput #minutes maxlength="2" placeholder="Tap a minutes">
-      <mat-hint align="start"><strong></strong> </mat-hint>
-      <mat-hint align="end">{{minutes.value.length}} / 2</mat-hint>
+    <mat-form-field class="full-width">
+      <input matInput formControlName="time" placeholder="00:00">
     </mat-form-field>
-    </td>
-    </tr>
-  </table>
 
+    <mat-form-field class="full-width">
+      <textarea matInput formControlName="notes" placeholder="Tap a notes"></textarea>
+    </mat-form-field>
 
+    <span class="app-action">
+	  
+		<button type="submit" mat-fab><mat-icon>check circle</mat-icon></button>
+	  
+    </span>
 
-  <mat-form-field>
-    <textarea matInput #notes maxlength="200" placeholder="Tap a notes"></textarea>
-    <mat-hint align="start"><strong></strong> </mat-hint>
-    <mat-hint align="end">{{notes.value.length}} / 200</mat-hint>
-  </mat-form-field>
-
-  <mat-radio-group [(ngModel)]="favoriteSeason">
-    <mat-radio-button  *ngFor="let category of categores" [value]="category">
-    {{category}}
-    </mat-radio-button>
-  </mat-radio-group>
-
+  </form>
 </div>
 
+<p>{{ taskForm.value | json }} {{ taskForm.status | json }}</p>
 
 
-<span class="app-action">
-	<a routerLink="/home">
-		<button mat-fab><mat-icon>check circle</mat-icon></button>
-	</a>
-</span>

@@ -10,13 +10,17 @@ import { TodoService} from '../services/todo.service';
 export class TodoListComponent implements OnInit {
 
 	todos: Todo[];
+  selectedTodo: Todo;
 
   constructor(private todoservice: TodoService,
   	          @Inject('BaseURL') private BaseURL) { }
 
   ngOnInit() {
   	this.todoservice.getTodos()
-  	  .subscribe(todos => this.todos = todos);
+  	  .subscribe(todos => this.todos = todos);    
   }
+  select(todo: Todo) {
+        this.selectedTodo = todo;
+      }
 
 }

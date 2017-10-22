@@ -1,42 +1,16 @@
-<div fxFlex="40" *ngIf="todo">
-    <div fxFlex>
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>
-            <h3>{{todo.title | uppercase}}</h3>
-          </mat-card-title>
-        </mat-card-header>
-   
-        <mat-card-content>
-          <p>{{todo.notes}}
-          </p>
-        </mat-card-content>
-    
-      </mat-card>
-    </div>
-  </div>
-
 
 <div>
   <form novalidate [formGroup]="todoForm" (ngSubmit)="onSubmit()" >
 
-  	<mat-input-container class="full-width" 
-            dividerColor="{{(formErrors.title) ? 'warn' : 'primary'}}">
+  	<mat-input-container class="full-width">
               <input matInput formControlName="title" placeholder="Title" type="text" required>
-              <mat-hint>
-                <span [hidden]="!(formErrors.title)">
-                  {{formErrors.title}}</span>
-              </mat-hint>
+        
     </mat-input-container>
 
     <mat-form-field class="full-width">
       <input matInput formControlName="date" [matDatepicker]="picker" placeholder="Choose a date">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-
-    <mat-form-field class="full-width">
-      <input matInput formControlName="time" placeholder="00:00">
     </mat-form-field>
 
     <mat-form-field class="full-width">

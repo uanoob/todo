@@ -1,0 +1,38 @@
+
+
+      <mat-list>
+        <mat-list-item class="app-list" *ngFor="let todo of todos" >
+        	<mat-checkbox [checked]="isChecked" mat-list-icon></mat-checkbox>
+          <h3 mat-line>{{todo.title}}</h3>
+          <span mat-line>{{todo.date}} {{todo.time}}</span>
+          <span class="fill-remaining-space"></span>
+
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/tododetail', todo.id]">
+            	
+                  <mat-icon>create</mat-icon>
+                  <span>Detail</span>
+              
+            </button>
+            <button mat-menu-item>
+              <mat-icon>delete</mat-icon>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+           
+          
+          <p mat-line>{{todo.notes}}</p>
+        </mat-list-item>
+      </mat-list>
+    
+
+<span class="app-action">
+	<a routerLink="">
+		<button mat-fab><mat-icon>add circle outline</mat-icon></button>
+	</a>
+</span>
+
+ 

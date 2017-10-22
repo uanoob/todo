@@ -1,5 +1,24 @@
+<div fxFlex="40" *ngIf="todo">
+    <div fxFlex>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <h3>{{todo.title | uppercase}}</h3>
+          </mat-card-title>
+        </mat-card-header>
+   
+        <mat-card-content>
+          <p>{{todo.notes}}
+          </p>
+        </mat-card-content>
+    
+      </mat-card>
+    </div>
+  </div>
+
+
 <div>
-  <form novalidate [formGroup]="taskForm" (ngSubmit)="onSubmit()" >
+  <form novalidate [formGroup]="todoForm" (ngSubmit)="onSubmit()" >
 
   	<mat-input-container class="full-width" 
             dividerColor="{{(formErrors.title) ? 'warn' : 'primary'}}">
@@ -33,6 +52,6 @@
   </form>
 </div>
 
-<p>{{ taskForm.value | json }} {{ taskForm.status | json }}</p>
+<p>{{ todoForm.value | json }} {{ todoForm.status | json }}</p>
 
 

@@ -10,14 +10,14 @@ import { AppRoutingModule} from './app-routing/app-routing.module';
 
 import 'hammerjs';
 
-import { TaskService } from './services/task.service';
+import { TodoService } from './services/todo.service';
 import { RestangularModule, Restangular } from 'ngx-restangular';
 import { RestangularConfigFactory } from './shared/restConfig';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { HomeComponent } from './home/home.component';
-import { TaskdetailComponent } from './taskdetail/taskdetail.component';
+import { TodoListComponent } from './todolist/todo-list.component';
+import { TodoDetailComponent } from './tododetail/todo-detail.component';
 import { baseURL } from './shared/baseurl';
 
 
@@ -25,8 +25,8 @@ import { baseURL } from './shared/baseurl';
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent,
-    TaskdetailComponent
+    TodoListComponent,
+    TodoDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +38,7 @@ import { baseURL } from './shared/baseurl';
     RestangularModule.forRoot(RestangularConfigFactory)
   ],
   providers: [
-    TaskService,
+    TodoService,
     {provide: 'BaseURL', useValue: baseURL}
   ],
   bootstrap: [AppComponent]

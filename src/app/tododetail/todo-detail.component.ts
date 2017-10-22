@@ -1,19 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TaskService } from '../services/task.service';
+import { TodoService } from '../services/todo.service';
 
-import { Task } from '../shared/task';
+import { Todo } from '../shared/todo';
+
+import { Params, ActivatedRoute } from '@angular/router';
 
 
 @Component({
-  selector: 'app-taskdetail',
-  templateUrl: './taskdetail.component.html',
-  styleUrls: ['./taskdetail.component.scss']
+  selector: 'app-todo-detail',
+  templateUrl: './todo-detail.component.html',
+  styleUrls: ['./todo-detail.component.scss']
 })
-export class TaskdetailComponent implements OnInit {
+export class TodoDetailComponent implements OnInit {
 
-	taskForm: FormGroup;
-	task: Task;
+	
+	todo: Todo;
+	todoIds: number[];
+	todoForm: FormGroup;
+	errMess: string;
 
 	formErrors = {
     'title': '',
@@ -34,15 +39,24 @@ export class TaskdetailComponent implements OnInit {
     };
 
 
-  constructor(private fb: FormBuilder,
-  	          private taskservice: TaskService) {
+  constructor(private todoservice: TodoService,
+  	          private route: ActivatedRoute,
+  	          private fb: FormBuilder,
+  	          @Inject('BaseURL') private BaseURL) {
   	          this.createForm();
   	           }
 
-  ngOnInit() {}
+  ngOnInit() {
+  	this.todoservice.getTodoIds().subscribe(todoIds => this.todoIds = todoIds);
+    this.route.params
+      .switchMap((params: Params) => {
+        return this.todoservice.getTodo(+params['id'])})
+      .subscribe(todo => { this.todo = todo; },
+                errmess => { this.todo = null; this.errMess = <any>errmess;} );
+  }
 
   createForm(): void {
-    this.taskForm = this.fb.group({
+    this.todoForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
       date: [''],
       time: [''],
@@ -52,7 +66,7 @@ export class TaskdetailComponent implements OnInit {
 	  category: 'home'
     });
 
-    this.taskForm.valueChanges
+    this.todoForm.valueChanges
       .subscribe(data => this.onValueChanged(data));
 
     this.onValueChanged(); // (re)set validation messages now
@@ -61,11 +75,11 @@ export class TaskdetailComponent implements OnInit {
   
 
   onSubmit() {
-  	this.task = this.taskForm.value;
-  	console.log(this.task);
-  	this.taskservice.submitTask(this.task)
-  	  .subscribe(task => {
-  	  	console.log(task);
+  	this.todo = this.todoForm.value;
+  	console.log(this.todo);
+  	this.todoservice.submitTodo(this.todo)
+  	  .subscribe(todo => {
+  	  	console.log(todo);
   	  },
   	  () => {
   	  	console.log("There was an error saving");
@@ -73,8 +87,8 @@ export class TaskdetailComponent implements OnInit {
   }
 
   onValueChanged(data?: any) {
-    if (!this.taskForm) { return; }
-    const form = this.taskForm;
+    if (!this.todoForm) { return; }
+    const form = this.todoForm;
     for (const field in this.formErrors) {
       // clear previous error message (if any)
       this.formErrors[field] = '';

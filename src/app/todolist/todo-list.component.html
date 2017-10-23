@@ -1,6 +1,6 @@
 
-
       <mat-list>
+        <h3>{{pagetitle}}</h3>
         <mat-list-item class="app-list" *ngFor="let todo of todos" >
         	<mat-checkbox [checked]="isChecked" mat-list-icon></mat-checkbox>
           <h3 mat-line>{{todo.title}}</h3>

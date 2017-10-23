@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { TodoService } from '../services/todo.service';
@@ -12,8 +12,10 @@ import { Params, ActivatedRoute } from '@angular/router';
   templateUrl: './todo-detail.component.html',
   styleUrls: ['./todo-detail.component.scss']
 })
-export class TodoDetailComponent implements OnChanges {
-  @Input() todo: Todo;
+export class TodoDetailComponent implements OnInit {
+  todo: Todo;
+
+  pagetitle: String = 'To Do Detail';
 
 	
 	todoIds: number[];
@@ -33,7 +35,14 @@ export class TodoDetailComponent implements OnChanges {
     this.route.params
       .switchMap((params: Params) => {
         return this.todoservice.getTodo(+params['id'])})
-      .subscribe(todo => { this.todo = todo; });
+      .subscribe(todo => { this.todo = todo;
+                           console.log(this.todo.title);
+                           this.todoForm.patchValue({
+                             title: this.todo.title,
+                             notes: this.todo.notes
+                           });
+                         } );
+
   }
 
   createForm(): void {
@@ -47,12 +56,6 @@ export class TodoDetailComponent implements OnChanges {
     });
 
     
-  }
-
-  ngOnChanges() {
-    this.todoForm.reset({
-      title: this.todo.title
-    })
   }
 
   

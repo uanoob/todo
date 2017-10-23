@@ -1,5 +1,6 @@
 
-<div>
+
+  <h3>{{pagetitle}}</h3>
   <form novalidate [formGroup]="todoForm" (ngSubmit)="onSubmit()" >
 
   	<mat-input-container class="full-width">
@@ -24,8 +25,8 @@
     </span>
 
   </form>
-</div>
 
-<p>{{ todoForm.value | json }} {{ todoForm.status | json }}</p>
 
+<p>{{ todoForm.value | json }}</p>
+<p>{{ todoForm.status | json }}</p>
 

@@ -1,0 +1,19 @@
+
+
+  <form novalidate [formGroup]="todoForm" (ngSubmit)="onSubmit()" >
+
+  	<mat-input-container class="full-width">
+              <input matInput formControlName="title" placeholder="Title" type="text" required>    
+    </mat-input-container>
+
+
+    <span class="app-action">
+		<button type="submit" mat-fab [disabled]="todoForm.status == 'INVALID'"><mat-icon>check circle</mat-icon></button>
+    </span>
+
+  </form>
+
+
+<p>{{ todoForm.value | json }}</p>
+<p>{{ todoForm.status | json }}</p>
+

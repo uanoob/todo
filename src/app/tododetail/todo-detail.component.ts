@@ -13,13 +13,11 @@ import { Params, ActivatedRoute } from '@angular/router';
   styleUrls: ['./todo-detail.component.scss']
 })
 export class TodoDetailComponent implements OnInit {
+
   todo: Todo;
-
-  pagetitle: String = 'To Do Detail';
-
-	
 	todoIds: number[];
 	todoForm: FormGroup;
+  itemId: number;
 	
   constructor(
     private todoservice: TodoService,
@@ -36,7 +34,8 @@ export class TodoDetailComponent implements OnInit {
       .switchMap((params: Params) => {
         return this.todoservice.getTodo(+params['id'])})
       .subscribe(todo => { this.todo = todo;
-                           console.log(this.todo.title);
+                           this.itemId = this.todo.id;
+                           console.log(this.todo.id);
                            this.todoForm.patchValue({
                              title: this.todo.title,
                              notes: this.todo.notes
@@ -62,15 +61,21 @@ export class TodoDetailComponent implements OnInit {
 
   onSubmit() {
   	this.todo = this.todoForm.value;
-  	console.log(this.todo);
-  	this.todoservice.submitTodo(this.todo)
+  	console.log(this.itemId);
+  	this.todoservice.getTodos()
   	  .subscribe(todo => {
-  	  	console.log(todo);
+        this.todo.id = this.itemId;
+  	  	console.log(this.itemId);
+        console.log(this.todo.id);
+        
+        
   	  },
   	  () => {
   	  	console.log("There was an error saving");
   	  });
+
   }
+
 
   
 

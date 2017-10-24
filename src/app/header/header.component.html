@@ -6,20 +6,16 @@
 
     <!-- This fills the remaining space of the current row -->
     <span class="fill-remaining-space"></span>
-    <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-        <button mat-button routerLink="/todolist" routerLinkActive="active">To Do List</button>
-        <button mat-button routerLink="/tododetail" routerLinkActive="active">To Do Detail</button>
-    </div>
-    <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+    
+    <button mat-button [mat-menu-trigger-for]="menu">
      <mat-icon>menu</mat-icon>
     </button>
 
-   
-
 </mat-toolbar>
 <mat-menu x-position="before" #menu="matMenu">
-    <button mat-menu-item routerLink="/todolist">To Do List</button>
-    <button mat-menu-item routerLink="/tododetail">To Do Detail</button>
+    <button mat-menu-item routerLink="">ToDo Day</button>
+    <button mat-menu-item routerLink="">ToDo Week</button>
+    <button mat-menu-item routerLink="">ToDo All</button>
     <!--<button md-menu-item>Help</button>-->
 </mat-menu>
 

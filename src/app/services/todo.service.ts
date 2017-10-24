@@ -12,6 +12,8 @@ export class TodoService {
   	return this.restangular.all('todos').post(todo);
   }
 
+
+
   getTodos(): Observable<Todo[]> {
   	return this.restangular.all('todos').getList();
   }
@@ -20,10 +22,14 @@ export class TodoService {
   	return this.restangular.one('todos', id).get();
   }
 
+  putTodo(id: number): Observable<Todo> {
+    return this.restangular.one('todos', id);
+  }
+
   getTodoIds(): Observable<number[]> {
   	return this.getTodos()
-  	.map(todos => { return todos.map(todo => todo.id) })
-  	.catch(error => { return error; });
+  	.map(todos => { return todos.map(todo => todo.id); })
+  	.catch(error => { return Observable.of(error); });
   }
 
 

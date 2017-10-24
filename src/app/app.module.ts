@@ -19,6 +19,7 @@ import { HeaderComponent } from './header/header.component';
 import { TodoListComponent } from './todolist/todo-list.component';
 import { TodoDetailComponent } from './tododetail/todo-detail.component';
 import { baseURL } from './shared/baseurl';
+import { TodoaddComponent } from './todoadd/todo-add.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { baseURL } from './shared/baseurl';
     AppComponent,
     HeaderComponent,
     TodoListComponent,
-    TodoDetailComponent
+    TodoDetailComponent,
+    TodoaddComponent
   ],
   imports: [
     BrowserModule,

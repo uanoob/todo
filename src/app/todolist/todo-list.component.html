@@ -1,9 +1,12 @@
 
-      <mat-list class="app-list" *ngFor="let todo of todos">
+      <mat-list>
+
+
     
-        <mat-list-item  *ngIf="todo">
+        <mat-list-item class="app-list" *ngFor="let todo of todos" [ngClass]="{completed: todo.isDone}">
         
-        	<mat-checkbox [checked]="isChecked" mat-list-icon></mat-checkbox>
+        	<mat-checkbox [checked]="todo.isDown" mat-list-icon></mat-checkbox>
+
           <h3 mat-line>{{todo.title}}</h3>
           <span mat-line>{{todo.date}} {{todo.time}}</span>
           <span class="fill-remaining-space"></span>

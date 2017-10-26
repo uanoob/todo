@@ -9,6 +9,8 @@ import { TodoService} from '../services/todo.service';
 })
 export class TodoListComponent implements OnInit {
 
+  isChecked: boolean;
+
 
 	todos: Todo[];
   selectedTodo: Todo;

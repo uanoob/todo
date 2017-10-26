@@ -1,5 +1,5 @@
 
-  <form novalidate [formGroup]="todoForm">
+  <form novalidate [formGroup]="todoForm" >
 
   	<mat-input-container class="full-width">
               <input matInput formControlName="title" placeholder="Title" type="text" required>
@@ -17,11 +17,11 @@
     </mat-form-field>
 
     <span class="app-action">
-		<button mat-fab (click)="onSave(todo)"><mat-icon>check circle</mat-icon></button>
+		<button mat-raised-button (click)="onSave(todo)" [disabled]="todoForm.pristine" color="accent">Save</button>
     </span>
 
     <span class="app-delete">
-    <button mat-fab (click)="onDelete(todo)"><mat-icon>delete circle</mat-icon></button>
+    <button mat-raised-button (click)="onDelete(todo)" color="warn">Delete</button>
     </span>
 
 

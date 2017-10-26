@@ -28,7 +28,7 @@ export class TodoaddComponent implements OnInit {
     this.todoForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
       date: '',
-      completed: false,
+      isDown: false,
       priority: '',
       notes: '',
 	  category: ''

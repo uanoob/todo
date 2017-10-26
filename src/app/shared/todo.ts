@@ -1,6 +1,6 @@
 export class Todo {
 	id: number;
-	completed: boolean;
+	isDown: boolean;
 	title: string;
 	date: string;
 	priority: string;

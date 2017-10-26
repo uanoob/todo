@@ -21,7 +21,9 @@ export class TodoListComponent implements OnInit {
   	  .subscribe(todos => this.todos = todos);    
   }
   select(todo: Todo) {
-        this.selectedTodo = todo;
-      }
+    this.selectedTodo = todo;
+  }
+
+  
 
 }

@@ -6,6 +6,8 @@ import { RestangularModule, Restangular } from 'ngx-restangular';
 @Injectable()
 export class TodoService {
 
+  public todo: Restangular;
+
   constructor(private restangular: Restangular) { }
 
   submitTodo(todo: Todo): Observable<Todo[]> {
@@ -22,8 +24,14 @@ export class TodoService {
   	return this.restangular.one('todos', id).get();
   }
 
-  putTodo(id: number): Observable<Todo> {
-    return this.restangular.one('todos', id);
+  editTodo(todo): Observable<Todo> {
+    this.todo = todo;
+    return this.todo.put();
+  }
+
+  deleteTodo(todo): Observable<Todo> {
+    this.todo = todo;
+    return this.todo.remove();
   }
 
   getTodoIds(): Observable<number[]> {

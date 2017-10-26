@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TodoService } from '../services/todo.service';
 import { Todo } from '../shared/todo';
 
-import { Params, ActivatedRoute } from '@angular/router';
+import { Params, ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -17,11 +17,11 @@ export class TodoDetailComponent implements OnInit {
   todo: Todo;
 	todoIds: number[];
 	todoForm: FormGroup;
-  itemId: number;
 	
   constructor(
     private todoservice: TodoService,
     private route: ActivatedRoute,
+    private router: Router,
     private fb: FormBuilder,
     @Inject('BaseURL') private BaseURL) {
 
@@ -34,11 +34,14 @@ export class TodoDetailComponent implements OnInit {
       .switchMap((params: Params) => {
         return this.todoservice.getTodo(+params['id'])})
       .subscribe(todo => { this.todo = todo;
-                           this.itemId = this.todo.id;
                            console.log(this.todo.id);
                            this.todoForm.patchValue({
+                             completed: this.todo.completed,
                              title: this.todo.title,
-                             notes: this.todo.notes
+                             date: this.todo.date,
+                             priority: this.todo.priority,
+                             notes: this.todo.notes,
+                             category: this.todo.category
                            });
                          } );
 
@@ -59,22 +62,34 @@ export class TodoDetailComponent implements OnInit {
 
   
 
-  onSubmit() {
-  	this.todo = this.todoForm.value;
-  	console.log(this.itemId);
-  	this.todoservice.getTodos()
+  onSave(todo: Todo) {
+    console.log(this.todo);
+    this.todo.completed = this.todoForm.value.completed;
+  	this.todo.title = this.todoForm.value.title;
+    this.todo.date = this.todoForm.value.date;
+    this.todo.priority = this.todoForm.value.priority;
+    this.todo.notes = this.todoForm.value.notes;
+    this.todo.category = this.todoForm.value.category;
+    console.log(this.todo);
+  	this.todoservice.editTodo(this.todo)
   	  .subscribe(todo => {
-        this.todo.id = this.itemId;
-  	  	console.log(this.itemId);
-        console.log(this.todo.id);
-        
-        
-  	  },
-  	  () => {
+        this.router.navigate(["/todolist"]);
+        console.log(this.todo);
+      },
+      () => {
   	  	console.log("There was an error saving");
   	  });
 
   }
+
+  onDelete(todo: Todo) {
+    this.todoservice.deleteTodo(todo)
+    .subscribe(todo => {
+      this.router.navigate(["/todolist"]);
+      console.log("Task delete");
+    })
+  }
+
 
 
   

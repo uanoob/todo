@@ -1,7 +1,8 @@
 
-      <mat-list>
+      <mat-list class="app-list" *ngFor="let todo of todos">
     
-        <mat-list-item class="app-list" *ngFor="let todo of todos" >
+        <mat-list-item  *ngIf="todo">
+        
         	<mat-checkbox [checked]="isChecked" mat-list-icon></mat-checkbox>
           <h3 mat-line>{{todo.title}}</h3>
           <span mat-line>{{todo.date}} {{todo.time}}</span>
@@ -17,14 +18,12 @@
                   <span>Detail</span>
               
             </button>
-            <button mat-menu-item>
-              <mat-icon>delete</mat-icon>
-              <span>Delete</span>
-            </button>
+           
           </mat-menu>
            
           
           <p mat-line>{{todo.notes}}</p>
+        
         </mat-list-item>
       </mat-list>
     

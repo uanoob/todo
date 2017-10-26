@@ -1,5 +1,5 @@
 
-  <form novalidate [formGroup]="todoForm" (ngSubmit)="onSubmit()" >
+  <form novalidate [formGroup]="todoForm">
 
   	<mat-input-container class="full-width">
               <input matInput formControlName="title" placeholder="Title" type="text" required>
@@ -17,10 +17,14 @@
     </mat-form-field>
 
     <span class="app-action">
-	  
-		<button type="submit" mat-fab><mat-icon>check circle</mat-icon></button>
-	  
+		<button mat-fab (click)="onSave(todo)"><mat-icon>check circle</mat-icon></button>
     </span>
+
+    <span class="app-delete">
+    <button mat-fab (click)="onDelete(todo)"><mat-icon>delete circle</mat-icon></button>
+    </span>
+
+
 
   </form>
 

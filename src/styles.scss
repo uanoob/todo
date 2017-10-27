@@ -42,8 +42,9 @@ mat-form-field.mat-form-field {
 .full-width {
   width: 100%;
 }
-.app-list .completed {
+.completed {
   color: #d9d9d9;
+  background-color: grey;
   text-decoration: line-through;
 }
 

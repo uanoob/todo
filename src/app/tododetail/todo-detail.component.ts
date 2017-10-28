@@ -36,7 +36,7 @@ export class TodoDetailComponent implements OnInit {
       .subscribe(todo => { this.todo = todo;
                            console.log(this.todo.id);
                            this.todoForm.patchValue({
-                             isDown: this.todo.isDown,
+                             isComplete: this.todo.isComplete,
                              title: this.todo.title,
                              date: this.todo.date,
                              priority: this.todo.priority,
@@ -51,7 +51,7 @@ export class TodoDetailComponent implements OnInit {
     this.todoForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
       date: [''],
-      isDown: false,
+      isComplete: false,
       priority: 'green',
       notes: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)] ],
 	  category: 'home'
@@ -64,7 +64,7 @@ export class TodoDetailComponent implements OnInit {
 
   onSave(todo: Todo) {
     console.log(this.todo);
-    this.todo.isDown = this.todoForm.value.isDown;
+    this.todo.isComplete = this.todoForm.value.isComplete;
   	this.todo.title = this.todoForm.value.title;
     this.todo.date = this.todoForm.value.date;
     this.todo.priority = this.todoForm.value.priority;

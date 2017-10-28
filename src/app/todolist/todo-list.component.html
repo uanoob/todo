@@ -3,10 +3,10 @@
 
 
     
-        <mat-list-item class="app-list" *ngFor="let todo of todos" [ngClass]="{'completed': todo.isDown}">
-          <p mat-line>{{todo.isDown}}</p>
+        <mat-list-item class="app-list" *ngFor="let todo of todos" [ngClass]="{'completed': todo.isComplete}">
+          <p mat-line>{{todo.isComplete}}</p>
         
-        	<mat-checkbox [checked]="todo.isDown" (change)="todo.isDown = !todo.isDown" mat-list-icon></mat-checkbox>
+        	<mat-checkbox [checked]="todo.isComplete" (change)="onComplete(todo)" mat-list-icon></mat-checkbox>
 
 
           <h3 mat-line>{{todo.title}}</h3>

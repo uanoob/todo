@@ -26,6 +26,14 @@ export class TodoListComponent implements OnInit {
     this.selectedTodo = todo;
   }
 
+  onComplete(todo) {
+    todo.isComplete = !todo.isComplete
+    console.log(todo.isComplete);
+    this.todoservice.editTodo(todo)
+      .subscribe(todo => console.log(todo));
+  
+}
+
   
 
 }

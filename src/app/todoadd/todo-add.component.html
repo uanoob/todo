@@ -1,19 +1,21 @@
+<form novalidate [formGroup]="todoForm" (ngSubmit)="onSubmit()">
 
+  <mat-form-field class="full-width">
+    <input matInput formControlName="title" placeholder="Title" type="text" required>
+  </mat-form-field>
 
-  <form novalidate [formGroup]="todoForm" (ngSubmit)="onSubmit()" >
+  <mat-form-field class="full-width">
+    <input matInput formControlName="date" [matDatepicker]="picker" placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
 
-  	<mat-input-container class="full-width">
-              <input matInput formControlName="title" placeholder="Title" type="text" required>    
-    </mat-input-container>
+  <mat-form-field class="full-width">
+    <textarea matInput formControlName="notes" placeholder="Tap a notes"></textarea>
+  </mat-form-field>
 
-
-    <span class="app-action">
+  <span class="app-action">
 		<button type="submit" mat-fab [disabled]="todoForm.status == 'INVALID'"><mat-icon>check circle</mat-icon></button>
-    </span>
+  </span>
 
-  </form>
-
-
-<p>{{ todoForm.value | json }}</p>
-<p>{{ todoForm.status | json }}</p>
-
+</form>

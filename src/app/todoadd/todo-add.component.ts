@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 import { TodoService } from '../services/todo.service';
 import { Todo } from '../shared/todo';
@@ -16,6 +18,7 @@ export class TodoaddComponent implements OnInit {
 
   constructor( private todoservice: TodoService,
                private fb: FormBuilder,
+               private router: Router,
                @Inject('BaseURL') private BaseURL) {
 
     this.createForm();
@@ -40,6 +43,7 @@ export class TodoaddComponent implements OnInit {
   	console.log(this.todo);
   	this.todoservice.submitTodo(this.todo)
   	  .subscribe(todo => {
+  	  	this.router.navigate(["/todolist"]);
   	  	console.log(todo);
   	  },
   	  () => {

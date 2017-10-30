@@ -34,7 +34,7 @@ export class TodoDetailComponent implements OnInit {
       .switchMap((params: Params) => {
         return this.todoservice.getTodo(+params['id'])})
       .subscribe(todo => { this.todo = todo;
-                           console.log(this.todo.id);
+                           console.log(this.todo._id);
                            this.todoForm.patchValue({
                              isComplete: this.todo.isComplete,
                              title: this.todo.title,

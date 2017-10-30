@@ -11,17 +11,17 @@ export class TodoService {
   constructor(private restangular: Restangular) { }
 
   submitTodo(todo: Todo): Observable<Todo[]> {
-  	return this.restangular.all('todos').post(todo);
+  	return this.restangular.all('cloud').post(todo);
   }
 
 
 
   getTodos(): Observable<Todo[]> {
-  	return this.restangular.all('todos').getList();
+  	return this.restangular.all('cloud').getList();
   }
 
   getTodo(id: number): Observable<Todo> {
-  	return this.restangular.one('todos', id).get();
+  	return this.restangular.one('cloud', id).get();
   }
 
   editTodo(todo): Observable<Todo> {
@@ -36,7 +36,7 @@ export class TodoService {
 
   getTodoIds(): Observable<number[]> {
   	return this.getTodos()
-  	.map(todos => { return todos.map(todo => todo.id); })
+  	.map(todos => { return todos.map(todo => todo._id); })
   	.catch(error => { return Observable.of(error); });
   }
 

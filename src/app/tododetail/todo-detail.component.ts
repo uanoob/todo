@@ -14,6 +14,8 @@ import { Params, ActivatedRoute, Router } from '@angular/router';
 })
 export class TodoDetailComponent implements OnInit {
 
+  private id: number;
+
   todo: Todo;
 	todoIds: number[];
 	todoForm: FormGroup;
@@ -29,13 +31,17 @@ export class TodoDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-  	this.todoservice.getTodoIds().subscribe(todoIds => this.todoIds = todoIds);
+  	
     this.route.params
-      .switchMap((params: Params) => {
-        return this.todoservice.getTodo(+params['id'])})
-      .subscribe(todo => { this.todo = todo;
-                           console.log(this.todo._id);
-                           this.todoForm.patchValue({
+      .forEach((params: Params) => {
+        this.id = params['id'];
+        console.log(this.id);
+      });
+      this.todoservice.getTodo(this.id)
+        .subscribe(todo => {
+          this.todo = todo;
+          console.log(this.todo);
+          this.todoForm.patchValue({
                              isComplete: this.todo.isComplete,
                              title: this.todo.title,
                              date: this.todo.date,
@@ -43,9 +49,11 @@ export class TodoDetailComponent implements OnInit {
                              notes: this.todo.notes,
                              category: this.todo.category
                            });
-                         } );
+        });
+      }
 
-  }
+
+  
 
   createForm(): void {
     this.todoForm = this.fb.group({

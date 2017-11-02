@@ -33,7 +33,7 @@ export class TodoDetailComponent implements OnInit {
   ngOnInit() {
   	
     this.route.params
-      .forEach((params: Params) => {
+      .subscribe((params: Params) => {
         this.id = params['id'];
         console.log(this.id);
       });

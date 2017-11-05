@@ -4,8 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material-module/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MomentModule } from 'angular2-moment';
-
+import { DatePipe } from '@angular/common';
 
 import { AppRoutingModule} from './app-routing/app-routing.module';
 
@@ -37,12 +36,12 @@ import { TodoaddComponent } from './todoadd/todo-add.component';
     ReactiveFormsModule,
     MaterialModule,
     FlexLayoutModule,
-    MomentModule,
     AppRoutingModule,
     RestangularModule.forRoot(RestangularConfigFactory)
   ],
   providers: [
     TodoService,
+    DatePipe,
     {provide: 'BaseURL', useValue: baseURL}
   ],
   bootstrap: [AppComponent]
